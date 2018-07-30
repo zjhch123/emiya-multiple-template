@@ -54,7 +54,7 @@ Object.keys(appPages).map(page => {
     filename: pageName + '.html',
     inject: true,
     template: path.resolve(paths.appSrc, pageName, 'index.html'),
-    chunks: [pageName]
+    chunks: [pageName, 'commons']
   }))
 })
 

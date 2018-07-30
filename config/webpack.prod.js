@@ -33,10 +33,6 @@ config.module.rules.push({
 });
 
 config.plugins.push(
-  new webpack.optimize.CommonsChunkPlugin({
-    names: ['commons'],
-    filename: 'commons/js/commons.js'
-  }),
   new CleanWebpackPlugin(['build'], {
     verbose: true,
     root: paths.appROOT

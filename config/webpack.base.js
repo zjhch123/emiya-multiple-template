@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const paths = require('./paths');
 
 const appPages = paths.appPages
@@ -18,7 +19,7 @@ module.exports = {
   entry: entries,
   output: {
     path: paths.appBuildPath,
-    publicPath: '.',
+    publicPath: './',
     filename: '[name]/js/entry.js',
   },
   module: {
@@ -75,5 +76,10 @@ module.exports = {
       }
     ]
   },
-  plugins: []
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['commons'],
+      filename: 'commons/js/commons.js'
+    }),
+  ]
 }
