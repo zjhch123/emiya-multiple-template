@@ -6,7 +6,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const paths = require('./paths');
 const config = require('./webpack.base.js');
 
-
 config.module.rules.push({
   test: /\.scss$/,
   use: ExtractTextPlugin.extract({
@@ -42,7 +41,7 @@ config.plugins.push(
   }),
   new webpack.LoaderOptionsPlugin({minimize: true}),
   new ExtractTextPlugin({
-    filename: '[name]/css/style.css',
+    filename: '[name]/css/style-[hash].css',
     allChunks: false,
     ignoreOrder: true
   }),
@@ -51,12 +50,13 @@ config.plugins.push(
 const appPages = paths.appPages
 Object.keys(appPages).map(page => {
   const entry = appPages[page]
-  const match = entry.match(/\/src\/(.*)\/App\.js/)
+  const match = entry.match(/\/js\/(.*)\.js/)
   const pageName = match && match[1]
+
   config.plugins.push(new HtmlWebpackPlugin({
     filename: pageName + '.html',
     inject: true,
-    template: path.resolve(paths.appSrc, pageName, 'index.html'),
+    template: path.resolve(paths.appViews, pageName + '.html'),
     chunks: [pageName, 'commons']
   }))
 })

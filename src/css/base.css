@@ -14,7 +14,7 @@ img[src=""] { opacity: 0; filter: alpha(opacity=0); }
 ::-ms-clear, ::-ms-reveal { display: none; }
 /*input 去掉chrome选中input时的外边框*/
 input { outline: none; border: 0; }
-html { font-size: 14px; }
+html { font-size: 16px; }
 ::-webkit-input-placeholder { color: #aaa; }
 ::-moz-placeholder { color: #aaa; }
 :-ms-input-placeholder { color: #aaa; }

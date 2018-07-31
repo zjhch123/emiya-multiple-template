@@ -5,22 +5,25 @@ const appPages = paths.appPages
 const entries = {}
 Object.keys(appPages).map(page => {
   const entry = appPages[page]
-  const match = entry.match(/\/src\/(.*)\/App\.js/)
+  const match = entry.match(/\/js\/(.*)\.js/)
   const pageName = match && match[1]
   entries[pageName] = entry
 })
-
 
 module.exports = {
   context: paths.appSrc,
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      '@css': paths.appCSS,
+      '@lib': paths.appLib
+    },
   },
   entry: entries,
   output: {
     path: paths.appBuildPath,
-    publicPath: './',
-    filename: '[name]/js/entry.js',
+    publicPath: '/',
+    filename: '[name]/js/entry-[hash].js',
   },
   module: {
     rules: [
@@ -36,12 +39,13 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
+        exclude: /node_modules/,
         use: [
           {
             loader: 'url-loader',
             options: {
               limit: 2048,
-              name: 'images/[name].[ext]'
+              name: 'commons/images/[name].[ext]'
             }
           }
         ]
@@ -79,7 +83,7 @@ module.exports = {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       names: ['commons'],
-      filename: 'commons/js/commons.js'
+      filename: 'commons/js/commons-[hash].js'
     }),
   ]
 }

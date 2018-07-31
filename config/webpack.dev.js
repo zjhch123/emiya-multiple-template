@@ -10,7 +10,7 @@ const config = require('./webpack.base.js');
 config.devServer = {
   historyApiFallback: true,
   overlay: true,
-  // stats: 'errors-only',
+  stats: 'errors-only',
   contentBase: paths.appSrc,
   inline: true,
   hot: true,
@@ -48,12 +48,13 @@ config.module.rules.push({
 const appPages = paths.appPages
 Object.keys(appPages).map(page => {
   const entry = appPages[page]
-  const match = entry.match(/\/src\/(.*)\/App\.js/)
+  const match = entry.match(/\/js\/(.*)\.js/)
   const pageName = match && match[1]
+
   config.plugins.push(new HtmlWebpackPlugin({
     filename: pageName + '.html',
     inject: true,
-    template: path.resolve(paths.appSrc, pageName, 'index.html'),
+    template: path.resolve(paths.appViews, pageName + '.html'),
     chunks: [pageName, 'commons']
   }))
 })
