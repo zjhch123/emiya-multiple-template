@@ -1,5 +1,20 @@
 # Emiya-multiple-template
 用于创建复杂的基于webpack的多entry项目
+## 0. 使用方式
+### 1. 安装[Emiya](https://github.com/zjhch123/emiya)
+```
+npm i emiya -g
+```
+### 2. 执行命令
+```
+emiya -w my-project
+```
+### 3. 使用
+```
+cd my-project
+npm i
+npm run dev
+```
 ## 1. 项目结构
 ```
 .
